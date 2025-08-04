@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Management{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h2>Registered Donors</h2>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Last Donation</th>
+                    <th>Health Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td>{{ donor.donor_id }}</td>
+                    <td>{{ donor.donor_name }}</td>
+                    <td>{{ donor.donor_age }}</td>
+                    <td>{{ donor.donor_blood_grp }}</td>
+                    <td>{{ donor.donor_contact }}</td>
+                    <td>{{ donor.donor_address }}</td>
+                    <td>{{ donor.donor_last_date.strftime('%Y-%m-%d') if donor.donor_last_date else 'N/A' }}</td>
+                    <td>{{ donor.donor_med_his }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No donors found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

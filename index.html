@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-bg">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Save Lives, One Donation at a Time</h1>
+            <p>Join our community of heroes and make a difference. Your donation can bring hope and healing to those in need.</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('donor') }}" class="btn btn-primary">Become a Donor</a>
+                <a href="{{ url_for('recipient') }}" class="btn btn-secondary">Request Blood</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>1,000+</h3>
+            <p>Lives Saved</p>
+        </div>
+        <div class="stat-card">
+            <h3>8</h3>
+            <p>Blood Types Supported</p>
+        </div>
+        <div class="stat-card">
+            <h3>24/7</h3>
+            <p>Emergency Service</p>
+        </div>
+    </section>
+</div>
+{% endblock %}

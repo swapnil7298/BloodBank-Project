@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, Admin! You have full database access.</p>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('admin_donors') }}" class="btn btn-secondary">View Donors</a>
+        <a href="{{ url_for('admin_donations') }}" class="btn btn-secondary">Manage Donations</a>
+        <a href="{{ url_for('admin_logout') }}" class="btn btn-danger">Logout</a>
+    </div>
+
+    <div class="query-box">
+        <h3>Database Query Interface</h3>
+        <form method="POST" action="{{ url_for('admin_dashboard') }}">
+            <textarea name="query" placeholder="Enter SQL query... e.g., SELECT * FROM donor;" required>{{ query_text or '' }}</textarea>
+            <button type="submit" class="btn btn-primary">Execute Query</button>
+        </form>
+    </div>
+
+    {% if results is not none %}
+    <h3>Query Results</h3>
+    <div class="results-table">
+        {% if results %}
+        <table>
+            <thead>
+                <tr>
+                    {% for key in results[0].keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Query executed successfully, but it returned no data to display.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Registration{% endblock %}
+
+{% block content %}
+<div class="donor-bg">
+    <div class="form-container">
+        <h2>Become a Lifesaver: Donor Registration</h2>
+        <form method="POST" action="{{ url_for('donor') }}">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" min="18" max="65" required placeholder="Must be 18-65">
+                </div>
+                <div class="form-group">
+                    <label for="blood_group">Blood Group</label>
+                    <select id="blood_group" name="blood_group" required>
+                        <option value="" disabled selected>Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required placeholder="e.g., 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="last_donation">Last Donation Date (if any)</label>
+                    <input type="date" id="last_donation" name="last_donation">
+                </div>
+                <div class="form-group">
+                    <label for="health_status">Health Status</label>
+                    <select id="health_status" name="health_status" required>
+                        <option value="Healthy">Healthy</option>
+                        <option value="Under Treatment">Under Treatment</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register as Donor</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blood Bank{% endblock %} - BloodHaven</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="logo">BloodHaven</a>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('donor') }}">Donate</a></li>
+                <li><a href="{{ url_for('recipient') }}">Request</a></li>
+                {% if session.admin_logged_in %}
+                    <li><a href="{{ url_for('admin_dashboard') }}" class="admin-btn">Dashboard</a></li>
+                    <li><a href="{{ url_for('admin_logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('admin') }}" class="admin-btn">Admin</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Flash messages section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main content block -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BloodHaven Project. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
